@@ -10,35 +10,39 @@ import javax.swing.JOptionPane;
  *
  * @author Andy
  */
-public class PrestamoUrgente extends Prestamo{
-    private int duracion = 7;
-    private int costo = 450;
+public class PrestamoRegular extends Prestamo{
+    private int duracion;
+    private int costoPorDia = 360;
 
-    public PrestamoUrgente(Libro libro, Usuario usuario) {
+    public PrestamoRegular(Libro libro, Usuario usuario) {
         super(libro, usuario);
     }
-    
+
     @Override
-    public void calcularCosto(){
+    public int calcularCosto(){
         int costoFinal;
-        String ampliar;
-        costoFinal = duracion*costo;
-        JOptionPane.showMessageDialog(null, "El costo del prestamo urgente (por 7 dias) sera de: " + costoFinal);
-        while (true) {            
-            ampliar = JOptionPane.showInputDialog("Desea ampliar el prestamo? (si/no)");
-            if (ampliar.equals("si")){
-                duracion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de dias que desea alargar el prestamo: "));
-                costoFinal = duracion*costo;
-                JOptionPane.showMessageDialog(null, "El costo del prestamo urgente (por " +duracion+ " dias) sera de: " + costoFinal);
-                break;
-            }else if (ampliar.equals("no")){         
-                break;
-            } else {
-                JOptionPane.showMessageDialog(null, "El dato ingresado es incorrecto");
-            }
-        
-        
-            
+        duracion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de dias que desea poseer el libro: "));
+        costoFinal = duracion*costoPorDia;
+        return costoFinal;
+    }
+    
+    public void validarPrestamo(Libro libro, Usuario usuario) throws Exception {
+        if (!libro.isDisponible()) {
+            throw new Exception("El libro no está disponible");
+        }
+        if (usuario.getEmail() == null) {
+            throw new Exception("El usuario no está registrado");
         }
     }
+    public void realizarPrestamo(Libro libro, Usuario usuario){
+        try{
+            validarPrestamo(libro, usuario);
+            int costo = calcularCosto();
+            JOptionPane.showMessageDialog(null, "El usuario: " +usuario+ " realizo un prestamo de: " +costo+ " por el libro: " +libro+ " exitosamente!");
+            libro.setDisponible(false);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+        
+    }   
 }
