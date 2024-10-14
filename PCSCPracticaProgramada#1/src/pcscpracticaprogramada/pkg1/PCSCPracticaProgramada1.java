@@ -14,7 +14,7 @@ public class PCSCPracticaProgramada1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         Autor autor = new Autor("John", "Tolkien");
+        Autor autor = new Autor("John", "Tolkien");
         Libro libro1 = new Libro("El senior de los anillos", autor, 1954, true);
        
         autor.agregarLibro(libro1);
@@ -29,18 +29,11 @@ public class PCSCPracticaProgramada1 {
             System.out.println(" " + libro.getTitulo() + " " + libro.getAnioPublicacion() + " ");
         }
 
-        try {
-
             PrestamoRegular prestamo = new PrestamoRegular(libro1, usuario);
-            prestamo.validarPrestamo(libro1, usuario); 
-            prestamo.calcularCosto(); 
+            prestamo.realizarPrestamo(libro1, usuario); 
 
             PrestamoUrgente prestamoUrgente = new PrestamoUrgente(libro1, usuario);
-            prestamoUrgente.calcularCosto(); 
+            prestamoUrgente.realizarPrestamo(libro1, usuario); 
 
-        } catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    }
 }
