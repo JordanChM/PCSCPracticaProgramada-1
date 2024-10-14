@@ -20,7 +20,7 @@ public class PCSCPracticaProgramada1 {
         autor.agregarLibro(libro1);
 
 
-        Usuario usuario = new Usuario("12-10-2024", "Juan Pérez", "alex@gmail.com");
+        Usuario usuario = new Usuario("12-10-2024", "Alex", "alex@gmail.com");
         
 
         System.out.println("Autor: " + autor.getNombre() + " " + autor.getApellido());
@@ -34,6 +34,14 @@ public class PCSCPracticaProgramada1 {
 
             PrestamoUrgente prestamoUrgente = new PrestamoUrgente(libro1, usuario);
             prestamoUrgente.realizarPrestamo(libro1, usuario); 
+
+         Libro[] listaLibros = {libro1};
+
+        // Crear una instancia de Gestion
+        Gestion gestionLibros = new Gestion(listaLibros, "Gestión de Libros", autor1, 2024, true);
+
+        // Mostrar los libros gestionados
+        gestionLibros.mostrarLibros();  
 
         }
 }
