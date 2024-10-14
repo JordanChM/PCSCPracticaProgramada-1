@@ -18,5 +18,5 @@ public abstract class Prestamo {
     }
     
     
-    public abstract void calcularCosto();
+    public abstract int calcularCosto();
 }
