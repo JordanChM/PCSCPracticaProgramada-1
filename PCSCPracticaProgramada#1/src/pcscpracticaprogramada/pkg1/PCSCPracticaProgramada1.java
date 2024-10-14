@@ -1,45 +1,62 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package pcscpracticaprogramada.pkg1;
 
-/**
- *
- * @author Andy
- */
 public class PCSCPracticaProgramada1 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
+        // Creación de objetos Autor y Libro
         Autor autor = new Autor("John", "Tolkien");
-        Libro libro1 = new Libro("El senior de los anillos", autor, 1954, true);
-       
+        Libro libro1 = new Libro("El señor de los anillos", autor, 1954, true);
+        Libro libro2 = new Libro("El hobbit", autor, 1937, true);
+        
         autor.agregarLibro(libro1);
+        autor.agregarLibro(libro2);
 
-
+        // Creación de un usuario
         Usuario usuario = new Usuario("12-10-2024", "Alex", "alex@gmail.com");
         
-
+        // Mostrar información del autor y sus libros
         System.out.println("Autor: " + autor.getNombre() + " " + autor.getApellido());
         System.out.println("Libros escritos: ");
         for (Libro libro : autor.getLibros()) {
-            System.out.println(" " + libro.getTitulo() + " " + libro.getAnioPublicacion() + " ");
+            System.out.println(" - " + libro.getTitulo() + " (" + libro.getAnioPublicacion() + ")");
         }
 
-            PrestamoRegular prestamo = new PrestamoRegular(libro1, usuario);
-            prestamo.realizarPrestamo(libro1, usuario); 
+        // Crear préstamos regulares y urgentes
+        PrestamoRegular prestamo = new PrestamoRegular(libro1, usuario);
+        prestamo.realizarPrestamo(libro1, usuario); 
 
-            PrestamoUrgente prestamoUrgente = new PrestamoUrgente(libro1, usuario);
-            prestamoUrgente.realizarPrestamo(libro1, usuario); 
+        PrestamoUrgente prestamoUrgente = new PrestamoUrgente(libro2, usuario);
+        prestamoUrgente.realizarPrestamo(libro2, usuario); 
 
-         Libro[] listaLibros = {libro1};
+        // Gestión de libros usando la clase AdministracionBiblioteca
+        AdministracionBiblioteca adminBiblioteca = new AdministracionBiblioteca();
 
-        Gestion gestionLibros = new Gestion(listaLibros, "Gestión de Libros", autor1, 2024, true);
+        // Agregar libros a la biblioteca
+        adminBiblioteca.agregarLibro(libro1);
+        adminBiblioteca.agregarLibro(libro2);
 
-        gestionLibros.mostrarLibros();  
+        // Agregar usuario a la biblioteca
+        adminBiblioteca.agregarUsuario(usuario);
 
+        // Mostrar todos los libros en la biblioteca
+        adminBiblioteca.mostrarLibros();
+
+        // Ordenar y mostrar los libros por año de publicación
+        adminBiblioteca.ordenarLibrosPorAnio();
+
+        // Buscar un libro por título
+        Libro libroBuscado = adminBiblioteca.buscarLibroPorTitulo("El hobbit");
+        if (libroBuscado != null) {
+            System.out.println("Libro encontrado: " + libroBuscado.getTitulo() + " (" + libroBuscado.getAnioPublicacion() + ")");
+        } else {
+            System.out.println("Libro no encontrado.");
         }
+
+        // Registrar préstamos en la biblioteca
+        adminBiblioteca.registrarPrestamo(usuario, libro1);
+        adminBiblioteca.registrarPrestamo(usuario, libro2);
+
+        // Mostrar los libros prestados por el usuario
+        adminBiblioteca.mostrarPrestamosDeUsuario(usuario);
+    }
 }
