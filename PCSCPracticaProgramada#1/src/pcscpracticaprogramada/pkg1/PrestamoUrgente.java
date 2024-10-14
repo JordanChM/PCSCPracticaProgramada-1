@@ -10,15 +10,14 @@ import javax.swing.JOptionPane;
  *
  * @author Andy
  */
-public class PrestamoRegular extends Prestamo{
+public class PrestamoUrgente extends Prestamo{
     private int duracion;
-    private int costoPorDia = 360;
+    private int costoPorDia = 525;
 
-    public PrestamoRegular(Libro libro, Usuario usuario) {
+    public PrestamoUrgente(Libro libro, Usuario usuario) {
         super(libro, usuario);
     }
-
-    @Override
+   @Override
     public int calcularCosto(){
         int costoFinal;
         duracion = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cantidad de dias que desea poseer el libro: "));
