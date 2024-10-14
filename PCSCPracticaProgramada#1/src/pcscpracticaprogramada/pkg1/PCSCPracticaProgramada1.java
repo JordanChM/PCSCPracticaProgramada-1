@@ -37,10 +37,8 @@ public class PCSCPracticaProgramada1 {
 
          Libro[] listaLibros = {libro1};
 
-        // Crear una instancia de Gestion
         Gestion gestionLibros = new Gestion(listaLibros, "Gestión de Libros", autor1, 2024, true);
 
-        // Mostrar los libros gestionados
         gestionLibros.mostrarLibros();  
 
         }
